@@ -24,22 +24,22 @@ namespace JurasicPark2
         static void Main(string[] args)
         {
             var Matt = new Dino();
-            Matt.Name = "Matt";
-            Matt.DietType = "Carnivore";
+            Matt.Name = "matt";
+            Matt.DietType = "carnivore";
             Matt.Weight = 500;
             Matt.EnclosureNumber = 3;
 
             var James = new Dino()
             {
-                Name = "James",
-                DietType = "Herbivore",
+                Name = "james",
+                DietType = "herbivore",
                 Weight = 100,
                 EnclosureNumber = 6,
             };
             var Andrew = new Dino()
             {
-                Name = "Andrew",
-                DietType = "Carnivore",
+                Name = "andrew",
+                DietType = "carnivore",
                 Weight = 120,
                 EnclosureNumber = 11,
             };
@@ -79,9 +79,9 @@ namespace JurasicPark2
                     var dino = new Dino();
                     Console.WriteLine("-------------------");
                     Console.Write("What is the dinos name? ");
-                    dino.Name = Console.ReadLine();
+                    dino.Name = Console.ReadLine().ToLower();
                     Console.Write("What is the diet type? ");
-                    dino.DietType = Console.ReadLine();
+                    dino.DietType = Console.ReadLine().ToLower();
                     Console.Write("What is the dinos weight? ");
                     dino.Weight = int.Parse(Console.ReadLine());
                     Console.Write("What is the dinos enclosure number? ");
@@ -91,19 +91,19 @@ namespace JurasicPark2
                 if (choice == "REMOVE")
                 {
                     Console.Write("What dino would you like to delete? ");
-                    var dinoToDeleteName = Console.ReadLine();
-                    var dinoToDelete = dinos.First(firstdino => firstdino.Name == dinoToDeleteName);
+                    var dinoToDeleteName = Console.ReadLine().ToLower();
+                    var dinoToDelete = dinos.First(firstDino => firstDino.Name == dinoToDeleteName);
                     dinos.Remove(dinoToDelete);
                 }
                 // error with transfering 
                 if (choice == "TRANSFER")
                 {
                     Console.Write("What is the name of the dino you'd like to transfer? ");
-                    var dinoToTransferName = Console.ReadLine();
-                    var dinoToTransfer = dinos.FindIndex(firstdino => firstdino.Name == dinoToTransferName);
-                    Console.Write("Where would you like to tranfer this dino to? ");
+                    var dinoToTransferName = Console.ReadLine().ToLower();
+                    var dinoToTransfer = dinos.Find(firstdino => firstdino.Name == dinoToTransferName);
+                    Console.Write("Where would you like to transfer this dino to? ");
                     var newEnclosureNumber = int.Parse(Console.ReadLine());
-                    dinos[dinoToTransfer].EnclosureNumber = newEnclosureNumber;
+                    dinoToTransfer.EnclosureNumber = newEnclosureNumber;
 
 
                 }
@@ -120,10 +120,9 @@ namespace JurasicPark2
                 // error displaying how many carnivores and herbivores there is 
                 if (choice == "SUMMARY")
                 {
-                    var carnivores = dinos.Where(Dino => Dino.DietType == "carnivore");
-                    var numberOfCarnivores = carnivores.Count();
-                    var numberOfHerbivores = dinos.Count();
-                    Console.Write($"There are {numberOfCarnivores} number of carnivores. There are {numberOfHerbivores} number of herbivores");
+                    var carnivores = dinos.Where(dino => dino.DietType == "carnivore").Count();
+                    var herbivores = dinos.Where(dino => dino.DietType == "herbivore").Count();
+                    Console.Write($"There are {carnivores} number of carnivores. There are {herbivores} number of herbivores");
                 }
             }
             BannerMessage("Goodbye");
